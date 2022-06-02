@@ -21,6 +21,10 @@ jobs:
           name: FrontEnd Build
           command: |
             npm run frontend:build
+      - run:
+          name: FrontEnd Deploy
+          command: |
+            npm run frontend:deploy
   build-and-deploy-backend:
     docker:
       - image: "cimg/base:stable"
@@ -35,6 +39,10 @@ jobs:
           name: BackEnd Build
           command: |
             npm run backend:build
+      - run:
+          name: BackEnd Deploy
+          command: |
+            npm run frontend:deploy
 
 workflows:
   build-and-deploy:
