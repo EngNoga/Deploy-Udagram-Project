@@ -28,11 +28,11 @@ jobs:
       - run:
           name: BackEnd Install
           command: |
-            npm run Backend:install
+            npm run backend:install
       - run:
           name: BackEnd Build
           command: |
-            npm run Backend:build
+            npm run backend:build
 
 workflows:
   build-and-deploy:
