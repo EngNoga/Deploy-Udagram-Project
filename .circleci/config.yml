@@ -33,6 +33,7 @@ jobs:
       - node/install:
           node-version: 14.17.1
       - aws-cli/setup
+      - eb/setup
       - run:
           name: BackEnd Install
           command: |
