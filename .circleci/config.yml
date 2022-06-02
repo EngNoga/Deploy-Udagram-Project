@@ -9,8 +9,10 @@ jobs:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - node/install
       - checkout
+      - node/install:
+          node-version: 14.17.1
+      - aws-cli/setup
       - run:
           name: FrontEnd Install
           command: |
