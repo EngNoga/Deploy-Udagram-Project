@@ -5,6 +5,7 @@ orbs:
   aws-cli: circleci/aws-cli@1.3.1
   eb: circleci/aws-elastic-beanstalk@2.0.1
 jobs:
+  #build and deploy backend project job
   build-and-deploy-frontend:
     docker:
       - image: "cimg/base:stable"
@@ -12,18 +13,28 @@ jobs:
       - checkout
       - node/install
       - aws-cli/setup
+      # install frontend udagram dependencies
       - run:
           name: FrontEnd Install
           command: |
             npm run frontend:install
+      #build frontend udagram project in `www` folder
       - run:
           name: FrontEnd Build
           command: |
             npm run frontend:build
+      #deploy frontend udagram project to S3 Bucket
       - run:
           name: FrontEnd Deploy
           command: |
             npm run frontend:deploy
+      #test frontend udagram project
+      - run:
+          name: Frontend Test
+          command: |
+            npm run frontend:test
+  #----------------------------------------------------
+  #build and deploy backend project job
   build-and-deploy-backend:
     docker:
       - image: "cimg/base:stable"
@@ -32,18 +43,26 @@ jobs:
       - node/install
       - aws-cli/setup
       - eb/setup
+      #install backend udagram dependencies
       - run:
           name: BackEnd Install
           command: |
             npm run backend:install
+      #build backend udagram project in `www` folder
       - run:
           name: BackEnd Build
           command: |
             npm run backend:build
+      #deploy backend udagram project to S3 Bucket
       - run:
           name: BackEnd Deploy
           command: |
             npm run backend:deploy
+      #test backend udagram project
+      - run:
+          name: BackEnd Test
+          command: |
+            npm run backend:test
 
 workflows:
   build-and-deploy:
